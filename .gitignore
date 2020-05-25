@@ -4,3 +4,8 @@
 /.settings/
 /bin/
 /build/
+.idea
+micrometer.iml
+micrometer.ipr
+micrometer.iws
+gradle
