@@ -1,0 +1,39 @@
+server:
+   port: 8086
+   servlet:
+      context-path: '/micrometer'
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*' 
+   endpoint:
+      health:
+         show-details: 'always'    
+   metrics:
+     use-global-registry: false
+     tags: 
+        application: 'micrometer-application'
+        env: 'test'
+     web:
+        server:
+          auto-time-requests: 'true'
+          requests-metric-name: 'my.requests'   
+     distribution:
+        percentiles-histogram:
+          my.requests: true
+        percentiles:
+          my.requests: 0.95, 0.99
+        sla:
+          my.requests: 10000ms, 40000ms   
+        minimum-expected-value: 
+          my.requests: 5000ms
+        maximum-expected-value:
+          my.requests: 200000ms
+     export:
+        atlas:
+          uri: 'http://localhost:7101/api/v1/publish'
+          enabled: false
+          step: 1m                    
+application:
+ region: 'asia'                                          
